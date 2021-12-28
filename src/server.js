@@ -17,6 +17,15 @@ const handleListen = () => console.log(`Listening on http://localhost:3000`);
 const server = http.createServer(app);
 const wss = new WebSocketServer({server});
 
-wss.on("connection", (socket) => {console.log(socket)})
+wss.on("connection", (socket) => {
+    console.log("Connected to Browser!");
+    socket.on("close", () => {
+        console.log("Disconnected from the Browser!");
+    });
+    socket.on("msg", (msg) => {
+        console.log(msg)
+    });
+    socket.send("hello!!");
+});
 
 server.listen(3000, handleListen);
