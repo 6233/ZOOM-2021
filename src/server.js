@@ -28,7 +28,7 @@ wsServer.on("connection", (socket) => {
     socket.to(roomName).emit("welcome");
   });
   socket.on("disconnecting", () => {
-    socket.rooms.forEach(() => {
+    socket.rooms.forEach((room) => {
       socket.to(room).emit("bye");
     });
   });
